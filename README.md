@@ -13,8 +13,8 @@ HOW:
 gRPC framework is built on a couple of strong foundations, which we need to understand before we move further in this course. Firstly, HTTP/2 protocol. We've already discussed before that the framework works on this protocol. So it would be nice to get an understanding of the working mechanism of this protocol. Secondly, protocol buffers or they're commonly known as protobuffs. These are used as the interface definition language, IDL, in gRPC. IDL is the way to define your service contract. That contract will contain the methods and the messages that you will pass when you call the methods. Protocol buffers is not the only way to do IDL in gRPC, but Google promotes this as a standard when you try to build services with this framework.
 
 
-**HTTP-1 protocol issues:
-**
+**HTTP-1 protocol issues:**
+Http1 has few issues like:
 ![image](https://user-images.githubusercontent.com/11258384/125916778-5a9a6e2d-f058-4bed-9e69-8024c9f975c3.png)
 
 
