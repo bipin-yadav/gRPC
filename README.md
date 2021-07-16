@@ -15,3 +15,6 @@ gRPC framework is built on a couple of strong foundations, which we need to unde
 **HTTP-1 protocol issues:
 **
 ![image](https://user-images.githubusercontent.com/11258384/125916778-5a9a6e2d-f058-4bed-9e69-8024c9f975c3.png)
+**
+Http1.1 sole some problems as:**
+An incremental version of HTTP that is 1.1 was introduced, web pipelining came into existence. Pipelining leads to persistent connections. What is it? It means that one TCP connection alone can handle multiple requests. There is no need to wait for another connection. Requests can be sent one after the other so that the server starts their processing. This means that if you want to run a lot of requests in parallel, you end up spawning multiple TCP connections. However, note that there is a limit to the number of TCP connections that the client wants to set up. But even if that happens, the responses still must come in the same order as the request sent. This means that if the response of a particular request is delayed, for example the request was held up for a database connection or some other resource than all the other responses are blocked and cannot be sent back to the client. This results in a big issue which is called head of line blocking, HOL. But this is an unintended side effect. In the next video we'll see, how are these problems going to be solved by the HTTP/2 protocol.
