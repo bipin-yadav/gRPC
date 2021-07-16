@@ -1,5 +1,5 @@
 # gRPC
-WHY gRPC ?
+**WHY gRPC ?**
 
 We started with **RPC**, Remote Procedural Call. In this, the client invokes a procedure on the server site in a different address space. As if the client was trying to call the function locally. RPC uses TCP protocol which hinders inter operability. RPCs are overwhelmingly complex to implement. It induces a certain amount of vulnerability because you're trying to connect to a different system in a different address space. And hence also incurs a lot of costs. Popular implementations of RPC are Java RMI, CORBA, etcetera. Owing to limitations of RPC, 
 
@@ -12,9 +12,11 @@ The answer to that question is, let's switch to the **gRPC** framework.
 HOW:
 gRPC framework is built on a couple of strong foundations, which we need to understand before we move further in this course. Firstly, HTTP/2 protocol. We've already discussed before that the framework works on this protocol. So it would be nice to get an understanding of the working mechanism of this protocol. Secondly, protocol buffers or they're commonly known as protobuffs. These are used as the interface definition language, IDL, in gRPC. IDL is the way to define your service contract. That contract will contain the methods and the messages that you will pass when you call the methods. Protocol buffers is not the only way to do IDL in gRPC, but Google promotes this as a standard when you try to build services with this framework.
 
+
 **HTTP-1 protocol issues:
 **
 ![image](https://user-images.githubusercontent.com/11258384/125916778-5a9a6e2d-f058-4bed-9e69-8024c9f975c3.png)
-**
-Http1.1 sole some problems as:**
-An incremental version of HTTP that is 1.1 was introduced, web pipelining came into existence. Pipelining leads to persistent connections. What is it? It means that one TCP connection alone can handle multiple requests. There is no need to wait for another connection. Requests can be sent one after the other so that the server starts their processing. This means that if you want to run a lot of requests in parallel, you end up spawning multiple TCP connections. However, note that there is a limit to the number of TCP connections that the client wants to set up. But even if that happens, the responses still must come in the same order as the request sent. This means that if the response of a particular request is delayed, for example the request was held up for a database connection or some other resource than all the other responses are blocked and cannot be sent back to the client. This results in a big issue which is called head of line blocking, HOL. But this is an unintended side effect. In the next video we'll see, how are these problems going to be solved by the HTTP/2 protocol.
+
+
+**Http1.1 sole some problems as:**
+An incremental version of HTTP that is 1.1 was introduced, web pipelining came into existence. Pipelining leads to persistent connections. What is it? It means that one TCP connection alone can handle multiple requests. There is no need to wait for another connection. Requests can be sent one after the other so that the server starts their processing. This means that if you want to run a lot of requests in parallel, you end up spawning multiple TCP connections. However, note that there is a limit to the number of TCP connections that the client wants to set up. But even if that happens, the responses still must come in the same order as the request sent. This means that if the response of a particular request is delayed, for example the request was held up for a database connection or some other resource than all the other responses are blocked and cannot be sent back to the client. This results in a big issue which is called head of line blocking, HOL. But this is an unintended side effect. These problems solved by the HTTP/2 protocol.
