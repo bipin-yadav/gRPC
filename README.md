@@ -20,3 +20,29 @@ Http1 has few issues like:
 
 **Http1.1 solved some problems**
 An incremental version of HTTP that is 1.1 was introduced, web pipelining came into existence. Pipelining leads to persistent connections. What is it? It means that one TCP connection alone can handle multiple requests. There is no need to wait for another connection. Requests can be sent one after the other so that the server starts their processing. This means that if you want to run a lot of requests in parallel, you end up spawning multiple TCP connections. However, note that there is a limit to the number of TCP connections that the client wants to set up. But even if that happens, the responses still must come in the same order as the request sent. This means that if the response of a particular request is delayed, for example the request was held up for a database connection or some other resource than all the other responses are blocked and cannot be sent back to the client. This results in a big issue which is called head of line blocking, HOL. But this is an unintended side effect. These problems solved by the HTTP/2 protocol.
+
+
+**EXAMPLE:**
+**How to Run**
+Run applications as:
+java -jar grpc-springboot-demo\demo-eureka-server\target\demo-eureka-server-0.0.1-SNAPSHOT.jar
+java -jar grpc-springboot-demo\demo-employee-service\target\demo-employee-service-0.0.1-SNAPSHOT.jar
+java -jar grpc-springboot-demo\demo-allocation-service\target\demo-allocation-service-0.0.1-SNAPSHOT.jar
+
+Service Methods are:
+Unary RPCs (gRPC Server: employee-service, gRPC Client: allocation-service)
+Proto Definition: rpc getEmployee (Employee) returns (Employee) { }
+End Point: {IP Address}:8082/allocation/{allocationID}
+
+Server streaming RPCs (gRPC Server: allocation-service, gRPC Client: employee-service)
+Proto Definition: rpc getAllocationByEmployee (Allocation) returns (stream Allocation) { }
+Synchronous End Point: {IP Address}:8089/employee/{employeeID}/allocation
+Asynchronous End Point: {IP Address}:8089/employee/{employeeID}/allocation?isSyncClient=N
+
+Client streaming RPCs (gRPC Server: employee-service, gRPC Client: allocation-service)
+Proto Definition: rpc getMostExperiencedEmployee (stream Employee) returns (Employee) { }
+End Point: {IP Address}:8082/{projectID}/allocation/getexperiencedemployeeinproject
+
+Bidirectional streaming RPCs (gRPC Server: employee-service, gRPC Client: allocation-service)
+Proto Definition: rpc getAllEmployeesByIDList (stream Employee) returns (stream Employee) { }
+End Point: {IP Address}:8082/allocation?projectID={projectID}
